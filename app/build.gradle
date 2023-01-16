@@ -1,3 +1,5 @@
+import ru.antonbasket.buildsrc.Versions
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
@@ -25,8 +27,8 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
-        kotlinCompilerVersion '1.6.10'
+        kotlinCompilerExtensionVersion (Versions.Versions.compose_version)
+        kotlinCompilerVersion (Versions.Versions.kotlinCompilerVersion)
     }
 
     buildTypes {
@@ -40,40 +42,36 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = Versions.Versions.jvmTarget
     }
 }
 
 dependencies {
-    def lifecycle_version = "2.5.0-rc02"
-    def nav_version = "2.5.3"
-    def koin_version = "3.2.2"
+    implementation(Versions.Deps.lifecycle_viewmodel)
+    implementation(Versions.Deps.lifecycle_livedata)
+    implementation(Versions.Deps.recyclerview_d)
+    implementation(Versions.Deps.activity_ktx)
+    implementation(Versions.Deps.core_ktx)
+    implementation(Versions.Deps.compose_ui)
+    implementation(Versions.Deps.compose_material)
+    implementation(Versions.Deps.compose_ui_tooling)
+    implementation(Versions.Deps.appcompat_d)
+    implementation(Versions.Deps.koin_android)
+    implementation(Versions.Deps.koin_android_scope)
+    implementation(Versions.Deps.kotlinx_coroutines_core)
+    implementation(Versions.Deps.lifecycle_viewmodel_compose)
+    implementation(Versions.Deps.activity_compose)
+    implementation(Versions.Deps.material_d)
+    implementation(Versions.Deps.constraintlayout)
+    implementation(Versions.Deps.kotlinx_serialization_json)
+    implementation(Versions.Deps.code_gson)
+    implementation(Versions.Deps.fragment_ktx)
+    implementation(Versions.Deps.navigation_fragment)
+    implementation(Versions.Deps.navigation_ui)
+    implementation(Versions.Deps.kotlinx_serialization_core_jvm)
+    kapt(Versions.Deps.room_compiler)
 
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
-    implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation "androidx.activity:activity-ktx:1.6.1"
-    implementation 'androidx.core:core-ktx:1.9.0'
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.ui:ui-tooling:$compose_version"
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-android-scope:$koin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0-alpha03"
-    implementation 'androidx.activity:activity-compose:1.6.1'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.2'
-    implementation 'com.google.code.gson:gson:2.9.0'
-    implementation 'androidx.fragment:fragment-ktx:1.5.5'
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-core-jvm:1.3.2'
-    kapt "androidx.room:room-compiler:2.4.3"
-
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation(Versions.DepsTest.junitTest)
+    androidTestImplementation(Versions.DepsTest.extJunitTest)
+    androidTestImplementation(Versions.DepsTest.espressoCoreTest)
 }
