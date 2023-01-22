@@ -1,6 +1,10 @@
+import ru.antonbasket.buildsrc.Versions
+
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.10'
+    id 'org.jetbrains.kotlin.kapt'
 }
 
 android {
@@ -17,6 +21,16 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        viewBinding true
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion (Versions.Versions.compose_version)
+        kotlinCompilerVersion (Versions.Versions.kotlinCompilerVersion)
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,17 +42,36 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = Versions.Versions.jvmTarget
     }
 }
 
 dependencies {
+    implementation(Versions.Deps.lifecycle_viewmodel)
+    implementation(Versions.Deps.lifecycle_livedata)
+    implementation(Versions.Deps.recyclerview_d)
+    implementation(Versions.Deps.activity_ktx)
+    implementation(Versions.Deps.core_ktx)
+    implementation(Versions.Deps.compose_ui)
+    implementation(Versions.Deps.compose_material)
+    implementation(Versions.Deps.compose_ui_tooling)
+    implementation(Versions.Deps.appcompat_d)
+    implementation(Versions.Deps.koin_android)
+    implementation(Versions.Deps.koin_android_scope)
+    implementation(Versions.Deps.kotlinx_coroutines_core)
+    implementation(Versions.Deps.lifecycle_viewmodel_compose)
+    implementation(Versions.Deps.activity_compose)
+    implementation(Versions.Deps.material_d)
+    implementation(Versions.Deps.constraintlayout)
+    implementation(Versions.Deps.kotlinx_serialization_json)
+    implementation(Versions.Deps.code_gson)
+    implementation(Versions.Deps.fragment_ktx)
+    implementation(Versions.Deps.navigation_fragment)
+    implementation(Versions.Deps.navigation_ui)
+    implementation(Versions.Deps.kotlinx_serialization_core_jvm)
+    kapt(Versions.Deps.room_compiler)
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    testImplementation(Versions.DepsTest.junitTest)
+    androidTestImplementation(Versions.DepsTest.extJunitTest)
+    androidTestImplementation(Versions.DepsTest.espressoCoreTest)
 }
